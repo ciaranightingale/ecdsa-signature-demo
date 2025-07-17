@@ -24,6 +24,11 @@ function App() {
     setPublicKeys(keys);
   };
 
+  const resetAll = () => {
+    setPrivateKey('');
+    setPublicKeys([]);
+  };
+
   return (
     <div className="min-h-screen bg-navy-900">
       <div className="max-w-6xl mx-auto px-4 py-8">
@@ -31,10 +36,16 @@ function App() {
           <h1 className="text-4xl md:text-5xl font-bold text-white mb-4">
             ECDSA Signature Demo
           </h1>
-          <p className="text-lg text-baby-blue-300 max-w-2xl mx-auto">
+          <p className="text-lg text-baby-blue-300 max-w-2xl mx-auto mb-6">
             Learn about Elliptic Curve Digital Signature Algorithm (ECDSA) through interactive demonstrations. 
             Generate keys, create signatures, and verify them step by step.
           </p>
+          <button
+            onClick={resetAll}
+            className="bg-red-600 hover:bg-red-700 text-white font-medium py-3 px-6 rounded-md transition-colors duration-200 border border-red-600 hover:border-red-700 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 focus:ring-offset-navy-900"
+          >
+            Reset All
+          </button>
         </header>
 
         <div className="space-y-8">
@@ -42,7 +53,7 @@ function App() {
           
           <PublicKeyDerivation 
             privateKey={privateKey} 
-            onPublicKeysChange={handlePublicKeysChange} 
+            onPublicKeysChange={handlePublicKeysChange}
           />
           
           <AddressGenerator publicKeys={publicKeys} />

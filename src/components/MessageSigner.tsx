@@ -17,6 +17,7 @@ export default function MessageSigner({ privateKey }: MessageSignerProps) {
     gasPrice: '20'
   });
 
+
   const handleSignMessage = () => {
     if (!privateKey || !message) return;
     
@@ -71,7 +72,7 @@ export default function MessageSigner({ privateKey }: MessageSignerProps) {
           <div className="flex gap-2 mb-6">
             <button
               onClick={() => setMessageType('custom')}
-              className={`px-4 py-2 rounded-md font-medium transition-colors duration-200 border ${
+              className={`flex-1 px-4 py-2 rounded-md font-medium transition-colors duration-200 border ${
                 messageType === 'custom'
                   ? 'bg-baby-blue-500 text-white border-baby-blue-500'
                   : 'bg-navy-700 text-baby-blue-300 hover:bg-navy-600 border-navy-600'
@@ -81,7 +82,7 @@ export default function MessageSigner({ privateKey }: MessageSignerProps) {
             </button>
             <button
               onClick={() => setMessageType('ethereum')}
-              className={`px-4 py-2 rounded-md font-medium transition-colors duration-200 border ${
+              className={`flex-1 px-4 py-2 rounded-md font-medium transition-colors duration-200 border ${
                 messageType === 'ethereum'
                   ? 'bg-baby-blue-500 text-white border-baby-blue-500'
                   : 'bg-navy-700 text-baby-blue-300 hover:bg-navy-600 border-navy-600'
@@ -156,10 +157,10 @@ export default function MessageSigner({ privateKey }: MessageSignerProps) {
                   />
                 </div>
               </div>
-              <div className="flex justify-end">
+              <div className="flex justify-start">
                 <button
                   onClick={handleCreateEthereumTx}
-                  className="bg-baby-blue-500 hover:bg-baby-blue-600 text-white font-medium py-2 px-4 rounded-md transition-colors duration-200 border border-baby-blue-500 hover:border-baby-blue-600 focus:outline-none focus:ring-2 focus:ring-baby-blue-500 focus:ring-offset-2 focus:ring-offset-navy-800 text-sm"
+                  className="bg-baby-blue-500 hover:bg-baby-blue-600 text-white font-medium px-4 py-2 rounded-md transition-colors duration-200 border border-baby-blue-500 hover:border-baby-blue-600 focus:outline-none focus:ring-2 focus:ring-baby-blue-500 focus:ring-offset-2 focus:ring-offset-navy-800"
                 >
                   Generate Transaction Message
                 </button>

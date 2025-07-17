@@ -8,16 +8,16 @@ interface SignatureVerifierProps {
 export default function SignatureVerifier({ publicKeys }: SignatureVerifierProps) {
   const [message, setMessage] = useState('');
   const [signature, setSignature] = useState('');
-  const [selectedPublicKey, setSelectedPublicKey] = useState('');
   const [verificationResult, setVerificationResult] = useState<boolean | null>(null);
   const [isVerifying, setIsVerifying] = useState(false);
 
   const handleVerify = async () => {
-    if (!message || !signature || !selectedPublicKey) return;
+    const publicKey = publicKeys[0]?.key;
+    if (!message || !signature || !publicKey) return;
     
     setIsVerifying(true);
     try {
-      const result = verifySignature(message, signature, selectedPublicKey);
+      const result = verifySignature(message, signature, publicKey);
       setVerificationResult(result);
     } catch (error) {
       console.error('Verification failed:', error);
@@ -30,14 +30,9 @@ export default function SignatureVerifier({ publicKeys }: SignatureVerifierProps
   const resetVerification = () => {
     setMessage('');
     setSignature('');
-    setSelectedPublicKey('');
     setVerificationResult(null);
   };
 
-  const getPublicKeyLabel = (key: { id: string; key: string; compressed: boolean }) => {
-    const preview = key.key.substring(0, 20) + '...';
-    return `Public Key: ${preview}`;
-  };
 
   return (
     <div className="bg-navy-800 rounded-lg shadow-lg p-8 border border-navy-700">
@@ -48,17 +43,22 @@ export default function SignatureVerifier({ publicKeys }: SignatureVerifierProps
         <h2 className="text-2xl font-bold text-white">Verify Signature</h2>
       </div>
 
-      <div className="space-y-6">
-        <div className="text-sm text-baby-blue-300 mb-4">
-          <p>Verify signatures using the original message and public key:</p>
-          <ul className="list-disc list-inside mt-2 space-y-1">
-            <li>Enter the exact message that was signed</li>
-            <li>Provide the signature to verify</li>
-            <li>Select the corresponding public key</li>
-          </ul>
+      {publicKeys.length === 0 ? (
+        <div className="text-center py-8 text-baby-blue-400">
+          <p>Generate a public key first to verify signatures</p>
         </div>
+      ) : (
+        <div className="space-y-6">
+          <div className="text-sm text-baby-blue-300 mb-4">
+            <p>Verify signatures using the original message and public key:</p>
+            <ul className="list-disc list-inside mt-2 space-y-1">
+              <li>Enter the exact message that was signed</li>
+              <li>Provide the signature to verify</li>
+              <li>Select the corresponding public key</li>
+            </ul>
+          </div>
 
-        <div className="space-y-4">
+          <div className="space-y-4">
           <label className="block text-sm font-medium text-baby-pink-500">
             Original Message:
           </label>
@@ -89,18 +89,14 @@ export default function SignatureVerifier({ publicKeys }: SignatureVerifierProps
             Public Key for Verification:
           </label>
           {publicKeys.length > 0 ? (
-            <select
-              value={selectedPublicKey}
-              onChange={(e) => setSelectedPublicKey(e.target.value)}
-              className="w-full p-4 bg-navy-700 border border-navy-600 rounded-lg focus:ring-2 focus:ring-hot-pink-500 focus:border-transparent text-baby-blue-300"
-            >
-              <option value="">Select a public key...</option>
-              {publicKeys.map((key) => (
-                <option key={key.id} value={key.key}>
-                  {getPublicKeyLabel(key)}
-                </option>
-              ))}
-            </select>
+            <div className="bg-navy-700 p-4 rounded-lg border border-navy-600">
+              <div className="font-mono text-sm break-all text-baby-blue-300">
+                {publicKeys[0].key}
+              </div>
+              <p className="text-xs text-baby-blue-400 mt-2">
+                Length: {publicKeys[0].key.length} characters
+              </p>
+            </div>
           ) : (
             <div className="text-baby-blue-400 text-sm bg-navy-700 p-4 rounded-lg">
               No public key available. Generate a public key first.
@@ -111,7 +107,7 @@ export default function SignatureVerifier({ publicKeys }: SignatureVerifierProps
         <div className="flex gap-2">
           <button
             onClick={handleVerify}
-            disabled={!message || !signature || !selectedPublicKey || isVerifying}
+            disabled={!message || !signature || publicKeys.length === 0 || isVerifying}
             className="flex-1 bg-hot-pink-500 hover:bg-hot-pink-600 text-white font-medium py-3 px-6 rounded-md transition-colors duration-200 border border-hot-pink-500 hover:border-hot-pink-600 focus:outline-none focus:ring-2 focus:ring-hot-pink-500 focus:ring-offset-2 focus:ring-offset-navy-800 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:bg-hot-pink-500 disabled:hover:border-hot-pink-500"
           >
             {isVerifying ? 'Verifying...' : 'Verify Signature'}
@@ -162,7 +158,7 @@ export default function SignatureVerifier({ publicKeys }: SignatureVerifierProps
             <div className="text-sm text-baby-blue-300">
               <p className="font-medium mb-1 text-baby-pink-500">How signature verification works:</p>
               <ul className="list-disc list-inside space-y-1 text-xs">
-                <li>The message is hashed using SHA-256</li>
+                <li>The message is hashed using keccak256</li>
                 <li>The signature is verified against the hash and public key</li>
                 <li>Only the holder of the corresponding private key could have created a valid signature</li>
                 <li>This proves authenticity and non-repudiation</li>
@@ -171,6 +167,7 @@ export default function SignatureVerifier({ publicKeys }: SignatureVerifierProps
           </div>
         </div>
       </div>
+    )}
     </div>
   );
 }

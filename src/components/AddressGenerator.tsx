@@ -51,13 +51,14 @@ export default function AddressGenerator({ publicKeys }: AddressGeneratorProps) 
     return sourceKey ? 'Public Key' : 'Unknown';
   };
 
+
   return (
     <div className="bg-navy-800 rounded-lg shadow-lg p-8 border border-navy-700">
       <div className="flex items-center gap-4 mb-8">
-        <div className="w-12 h-12 bg-baby-blue-500 rounded-full flex items-center justify-center flex-shrink-0">
+        <div className="w-12 h-12 bg-hot-pink-500 rounded-full flex items-center justify-center flex-shrink-0">
           <span className="text-white font-bold text-lg">3</span>
         </div>
-        <h2 className="text-2xl font-bold text-white">Generate Address</h2>
+        <h2 className="text-2xl font-bold text-white">Derive Address</h2>
       </div>
 
       {publicKeys.length === 0 ? (
@@ -69,14 +70,14 @@ export default function AddressGenerator({ publicKeys }: AddressGeneratorProps) 
           <div className="text-sm text-baby-blue-300 mb-4">
             <p>Generate an Ethereum address from your public key:</p>
             <ul className="list-disc list-inside mt-2 space-y-1">
-              <li>Ethereum addresses use Keccak256 hash of the public key</li>
+              <li>Ethereum addresses are derived from the keccak256 hash of the public key</li>
               <li>The address is the last 20 bytes of the hash</li>
             </ul>
           </div>
 
           <button
             onClick={generateAddresses}
-            className="bg-baby-blue-500 hover:bg-baby-blue-600 text-white font-medium py-3 px-6 rounded-md transition-colors duration-200 border border-baby-blue-500 hover:border-baby-blue-600 focus:outline-none focus:ring-2 focus:ring-baby-blue-500 focus:ring-offset-2 focus:ring-offset-navy-800"
+            className="w-full bg-hot-pink-500 hover:bg-hot-pink-600 text-white font-medium py-3 px-6 rounded-md transition-colors duration-200 border border-hot-pink-500 hover:border-hot-pink-600 focus:outline-none focus:ring-2 focus:ring-hot-pink-500 focus:ring-offset-2 focus:ring-offset-navy-800"
           >
             Generate Address
           </button>
@@ -95,7 +96,7 @@ export default function AddressGenerator({ publicKeys }: AddressGeneratorProps) 
                   </div>
                   <button
                     onClick={() => copyToClipboard(address.address)}
-                    className="bg-baby-blue-500 hover:bg-baby-blue-600 text-white px-3 py-3 rounded-md text-sm transition-colors duration-200 border border-baby-blue-500 hover:border-baby-blue-600 focus:outline-none focus:ring-2 focus:ring-baby-blue-500 focus:ring-offset-2 focus:ring-offset-navy-700"
+                    className="bg-hot-pink-500 hover:bg-hot-pink-600 text-white px-3 py-3 rounded-md text-sm transition-colors duration-200 border border-hot-pink-500 hover:border-hot-pink-600 focus:outline-none focus:ring-2 focus:ring-hot-pink-500 focus:ring-offset-2 focus:ring-offset-navy-700"
                     title="Copy to clipboard"
                   >
                     <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">

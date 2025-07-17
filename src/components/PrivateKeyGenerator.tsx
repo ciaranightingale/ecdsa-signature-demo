@@ -20,6 +20,7 @@ export default function PrivateKeyGenerator({ onPrivateKeyGenerated }: PrivateKe
     navigator.clipboard.writeText(privateKey);
   };
 
+
   return (
     <div className="bg-navy-800 rounded-lg shadow-lg p-8 border border-navy-700">
       <div className="flex items-center gap-4 mb-8">
@@ -45,11 +46,9 @@ export default function PrivateKeyGenerator({ onPrivateKeyGenerated }: PrivateKe
 
       <div className="space-y-6">
         <div className="text-sm text-baby-blue-300 mb-4">
-          <p>Generate a cryptographically secure private key:</p>
+          <p>Generate a private key:</p>
           <ul className="list-disc list-inside mt-2 space-y-1">
             <li>Private keys are 256-bit random numbers</li>
-            <li>Never share your private key with anyone</li>
-            <li>This is for educational purposes only</li>
           </ul>
         </div>
 
