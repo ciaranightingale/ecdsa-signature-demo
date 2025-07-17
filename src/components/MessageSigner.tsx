@@ -106,7 +106,7 @@ export default function MessageSigner({ privateKey }: MessageSignerProps) {
 
           {messageType === 'custom' ? (
             <div className="space-y-4">
-              <label className="block text-sm font-medium text-baby-pink-500">
+              <label className="block text-sm font-medium text-baby-blue-500">
                 Message to Sign:
               </label>
               <textarea
