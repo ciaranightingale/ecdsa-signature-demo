@@ -17,6 +17,18 @@ export default function MessageSigner({ privateKey }: MessageSignerProps) {
     gasPrice: '20'
   });
 
+  const resetAll = () => {
+    setMessage('');
+    setSignature('');
+    setMessageType('custom');
+    setEthereumTx({
+      to: '0x742d35Cc6634C0532925a3b8D',
+      value: '0.1',
+      nonce: 0,
+      gasLimit: '21000',
+      gasPrice: '20'
+    });
+  };
 
   const handleSignMessage = () => {
     if (!privateKey || !message) return;
@@ -48,7 +60,7 @@ export default function MessageSigner({ privateKey }: MessageSignerProps) {
   return (
     <div className="bg-navy-800 rounded-lg shadow-lg p-8 border border-navy-700">
       <div className="flex items-center gap-4 mb-8">
-        <div className="w-12 h-12 bg-baby-blue-500 rounded-full flex items-center justify-center flex-shrink-0">
+        <div className="w-12 h-12 bg-hot-pink-500 rounded-full flex items-center justify-center flex-shrink-0">
           <span className="text-white font-bold text-lg">4</span>
         </div>
         <h2 className="text-2xl font-bold text-white">Sign Message</h2>
@@ -157,7 +169,8 @@ export default function MessageSigner({ privateKey }: MessageSignerProps) {
                   />
                 </div>
               </div>
-              <div className="flex justify-start">
+              <div className="flex justify-start
+            ">
                 <button
                   onClick={handleCreateEthereumTx}
                   className="bg-baby-blue-500 hover:bg-baby-blue-600 text-white font-medium px-4 py-2 rounded-md transition-colors duration-200 border border-baby-blue-500 hover:border-baby-blue-600 focus:outline-none focus:ring-2 focus:ring-baby-blue-500 focus:ring-offset-2 focus:ring-offset-navy-800"
@@ -187,13 +200,21 @@ export default function MessageSigner({ privateKey }: MessageSignerProps) {
             </div>
           )}
 
-          <button
-            onClick={handleSignMessage}
-            disabled={!message}
-            className="w-full bg-hot-pink-500 hover:bg-hot-pink-600 text-white font-medium py-3 px-6 rounded-md transition-colors duration-200 border border-hot-pink-500 hover:border-hot-pink-600 focus:outline-none focus:ring-2 focus:ring-hot-pink-500 focus:ring-offset-2 focus:ring-offset-navy-800 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:bg-hot-pink-500 disabled:hover:border-hot-pink-500"
-          >
-            Sign Message
-          </button>
+          <div className="flex gap-2">
+            <button
+              onClick={handleSignMessage}
+              disabled={!message}
+              className="flex-1 bg-hot-pink-500 hover:bg-hot-pink-600 text-white font-medium py-3 px-6 rounded-md transition-colors duration-200 border border-hot-pink-500 hover:border-hot-pink-600 focus:outline-none focus:ring-2 focus:ring-hot-pink-500 focus:ring-offset-2 focus:ring-offset-navy-800 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:bg-hot-pink-500 disabled:hover:border-hot-pink-500"
+            >
+              Sign Message
+            </button>
+            <button
+              onClick={resetAll}
+              className="bg-navy-700 hover:bg-navy-600 text-white font-medium py-3 px-6 rounded-md transition-colors duration-200 border border-navy-600 hover:border-navy-500 focus:outline-none focus:ring-2 focus:ring-navy-500 focus:ring-offset-2 focus:ring-offset-navy-800"
+            >
+              Reset
+            </button>
+          </div>
 
           {signature && (
             <div className="space-y-4">
@@ -215,7 +236,7 @@ export default function MessageSigner({ privateKey }: MessageSignerProps) {
                 </button>
               </div>
               <p className="text-xs text-baby-blue-400">
-                Length: {signature.length / 2} bytes (signature length varies)
+                Length: {signature.length} characters
               </p>
             </div>
           )}
