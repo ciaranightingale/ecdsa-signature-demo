@@ -92,7 +92,7 @@ export default function PublicKeyDerivation({ privateKey, onPublicKeysChange }: 
                 {publicKey}
               </div>
               <p className="text-xs text-baby-blue-400 mt-2">
-                Length: {publicKey.length} characters
+                Length: {publicKey.replace('0x', '').length / 2} bytes (uncompressed)
               </p>
             </div>
           ) : (

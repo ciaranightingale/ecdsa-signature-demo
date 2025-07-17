@@ -93,9 +93,6 @@ export default function SignatureVerifier({ publicKeys }: SignatureVerifierProps
               <div className="font-mono text-sm break-all text-baby-blue-300">
                 {publicKeys[0].key}
               </div>
-              <p className="text-xs text-baby-blue-400 mt-2">
-                Length: {publicKeys[0].key.length} characters
-              </p>
             </div>
           ) : (
             <div className="text-baby-blue-400 text-sm bg-navy-700 p-4 rounded-lg">

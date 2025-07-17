@@ -215,7 +215,7 @@ export default function MessageSigner({ privateKey }: MessageSignerProps) {
                 </button>
               </div>
               <p className="text-xs text-baby-blue-400">
-                Length: {signature.length} characters
+                Length: {signature.length / 2} bytes (signature length varies)
               </p>
             </div>
           )}

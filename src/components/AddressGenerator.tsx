@@ -108,7 +108,7 @@ export default function AddressGenerator({ publicKeys }: AddressGeneratorProps) 
                   {address.address}
                 </div>
                 <p className="text-xs text-baby-blue-400 mt-2">
-                  Length: {address.address.length} characters
+                  Length: {address.address.replace('0x', '').length / 2} bytes
                 </p>
               </div>
             ))}

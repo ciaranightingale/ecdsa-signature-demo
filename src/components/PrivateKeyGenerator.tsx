@@ -79,7 +79,7 @@ export default function PrivateKeyGenerator({ onPrivateKeyGenerated }: PrivateKe
               </button>
             </div>
             <p className="text-xs text-baby-blue-400">
-              Length: {privateKey.length} characters (including 0x prefix)
+              Length: {privateKey.replace('0x', '').length / 2} bytes
             </p>
           </div>
         )}
