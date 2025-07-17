@@ -36,16 +36,10 @@ function App() {
           <h1 className="text-4xl md:text-5xl font-bold text-white mb-4">
             ECDSA Signature Demo
           </h1>
-          <p className="text-lg text-baby-blue-300 max-w-2xl mx-auto mb-6">
+          <p className="text-lg text-baby-blue-300 max-w-2xl mx-auto">
             Learn about Elliptic Curve Digital Signature Algorithm (ECDSA) through interactive demonstrations. 
             Generate keys, create signatures, and verify them step by step.
           </p>
-          <button
-            onClick={resetAll}
-            className="bg-red-600 hover:bg-red-700 text-white font-medium py-3 px-6 rounded-md transition-colors duration-200 border border-red-600 hover:border-red-700 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 focus:ring-offset-navy-900"
-          >
-            Reset All
-          </button>
         </header>
 
         <div className="space-y-8">
@@ -62,6 +56,17 @@ function App() {
           
           <SignatureVerifier publicKeys={publicKeys} />
         </div>
+
+        {(privateKey || publicKeys.length > 0) && (
+          <div className="mt-12 text-center">
+            <button
+              onClick={resetAll}
+              className="bg-red-600 hover:bg-red-700 text-white font-medium py-3 px-6 rounded-md transition-colors duration-200 border border-red-600 hover:border-red-700 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 focus:ring-offset-navy-900"
+            >
+              Reset All
+            </button>
+          </div>
+        )}
 
         <div className="mt-16 bg-navy-800 rounded-lg shadow-lg p-6 border border-navy-700">
           <h2 className="text-2xl font-bold text-white mb-4">About ECDSA</h2>
